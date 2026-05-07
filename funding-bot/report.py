@@ -101,6 +101,12 @@ def main() -> None:
     args = parser.parse_args()
 
     stats = load_extended_stats(args.db_path, since=args.since, until=args.until)
+from storage import Storage
+
+
+def main() -> None:
+    storage = Storage()
+    stats = storage.get_paper_stats()
     print("paper_trades CLOSED stats")
     print(f"trades: {stats.trades}")
     print(f"win_rate: {stats.win_rate:.2%}")

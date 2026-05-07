@@ -42,6 +42,10 @@ def _parse_retry_after_seconds(value: str | None) -> float | None:
 def _is_retryable_http_error(exc: httpx.HTTPStatusError) -> bool:
     return exc.response.status_code in RETRYABLE_HTTP_STATUSES
 
+from config import API_BASE_URL, BACKOFF_BASE_SECONDS, MAX_RETRIES, REQUEST_TIMEOUT_SECONDS
+
+logger = logging.getLogger(__name__)
+
 
 class BinancePublicClient:
     def __init__(self) -> None:
@@ -53,6 +57,7 @@ class BinancePublicClient:
                 write=HTTP_WRITE_TIMEOUT_SECONDS,
                 pool=HTTP_POOL_TIMEOUT_SECONDS,
             ),
+            timeout=httpx.Timeout(REQUEST_TIMEOUT_SECONDS),
             limits=httpx.Limits(max_keepalive_connections=10, max_connections=20),
         )
 
@@ -130,6 +135,18 @@ class BinancePublicClient:
                     exc.__class__.__name__,
                     sleep_s,
                     exc,
+            except (httpx.TimeoutException, httpx.NetworkError, httpx.HTTPStatusError) as exc:
+                if attempt == MAX_RETRIES:
+                    logger.error("GET %s failed after %d attempts: %s", endpoint, attempt, exc)
+                    raise
+                sleep_s = BACKOFF_BASE_SECONDS * (2 ** (attempt - 1))
+                logger.warning(
+                    "GET %s attempt %d/%d failed: %s; retrying in %.2fs",
+                    endpoint,
+                    attempt,
+                    MAX_RETRIES,
+                    exc,
+                    sleep_s,
                 )
                 await asyncio.sleep(sleep_s)
         raise RuntimeError("Unreachable retry loop")

@@ -109,6 +109,13 @@ async def run(max_cycles: int | None = None) -> None:
                         cycles_run,
                         failed_symbols,
                         len(results),
+                if all(results):
+                    consecutive_error_cycles = 0
+                else:
+                    consecutive_error_cycles += 1
+                    logger.warning(
+                        "Cycle %d had errors (%d/%d consecutive error cycles).",
+                        cycles_run,
                         consecutive_error_cycles,
                         MAX_CONSECUTIVE_ERRORS,
                     )
@@ -117,6 +124,7 @@ async def run(max_cycles: int | None = None) -> None:
                             "Circuit breaker triggered after %d consecutive error cycles; check network connectivity to Binance before restart.",
                             MAX_CONSECUTIVE_ERRORS,
                         )
+                        logger.error("Circuit breaker triggered after %d consecutive error cycles.", MAX_CONSECUTIVE_ERRORS)
                         break
 
                 if max_cycles is not None and cycles_run >= max_cycles:

@@ -69,6 +69,12 @@ async def process_symbol(symbol: str, client: BinancePublicClient, storage: Stor
             return False
 
 
+def next_consecutive_error_cycles(current_count: int, cycle_results: list[bool]) -> int:
+    if all(cycle_results):
+        return 0
+    return current_count + 1
+
+
 async def run(max_cycles: int | None = None) -> None:
     validate_runtime_config()
     storage = Storage()
@@ -95,6 +101,14 @@ async def run(max_cycles: int | None = None) -> None:
                 results = await asyncio.gather(*(process_symbol(symbol, client, storage, sem) for symbol in SYMBOLS))
                 cycles_run += 1
 
+                consecutive_error_cycles = next_consecutive_error_cycles(consecutive_error_cycles, list(results))
+                if consecutive_error_cycles:
+                    failed_symbols = len([result for result in results if not result])
+                    logger.warning(
+                        "Cycle %d had %d/%d symbols fail (%d/%d consecutive error cycles).",
+                        cycles_run,
+                        failed_symbols,
+                        len(results),
                 if all(results):
                     consecutive_error_cycles = 0
                 else:
@@ -106,6 +120,10 @@ async def run(max_cycles: int | None = None) -> None:
                         MAX_CONSECUTIVE_ERRORS,
                     )
                     if consecutive_error_cycles >= MAX_CONSECUTIVE_ERRORS:
+                        logger.error(
+                            "Circuit breaker triggered after %d consecutive error cycles; check network connectivity to Binance before restart.",
+                            MAX_CONSECUTIVE_ERRORS,
+                        )
                         logger.error("Circuit breaker triggered after %d consecutive error cycles.", MAX_CONSECUTIVE_ERRORS)
                         break
 

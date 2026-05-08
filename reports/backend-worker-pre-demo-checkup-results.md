@@ -31,3 +31,17 @@ Ce statut est basé sur les vérifications live rapportées après exécution de
 ## Point restant à suivre après démo
 
 - Décision Alexandre sur Upstash Redis en production pour résilience pending-actions.
+
+## Explication simple — Upstash Redis / pending actions
+
+Dans l'app, une **pending action** est une action proposée par l'IA mais pas encore exécutée, par exemple: "je vais modifier ce contact, confirmez-vous ?".
+
+Tant que l'utilisateur n'a pas confirmé, il faut stocker temporairement cette action quelque part.
+
+- Sans Redis: l'action en attente est gardée en mémoire du serveur Render.
+- Si Render redémarre pendant ce moment-là, cette action en attente peut être perdue.
+- Avec Upstash Redis: l'action en attente est gardée dans un petit stockage externe temporaire, plus robuste aux redémarrages.
+
+Pour la démo N. Marti, ce n'est pas bloquant si on évite de redéployer/redémarrer pendant la présentation.
+
+Après la démo, Alexandre devra simplement décider si on active Upstash Redis pour rendre ce mécanisme plus robuste en production.

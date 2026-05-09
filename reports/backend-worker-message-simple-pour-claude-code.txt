@@ -1,0 +1,99 @@
+# backend-worker — message simple à donner à Claude Code
+
+## Réponse courte
+
+Ne donne pas tout l'historique à Claude Code.
+Ne donne pas tous les rapports.
+Ne demande pas "fais tout".
+
+La seule prochaine action utile est: Upstash Redis / pending actions.
+
+## État actuel
+
+- CI GitHub Actions: déjà fait au commit 363682c. Ne pas refaire.
+- SEC-001 phase 2: bloqué. Le frontend envoie encore x-organization-id sur chaque appel API. Ne pas toucher maintenant.
+- Upstash Redis: à faire après création/configuration des credentials.
+
+## Ce qu'Alexandre doit faire avant Claude Code
+
+1. Aller sur https://console.upstash.com
+2. Créer une DB Redis.
+3. Ouvrir les REST credentials.
+4. Copier les valeurs:
+   - UPSTASH_REDIS_REST_URL
+   - UPSTASH_REDIS_REST_TOKEN
+5. Ajouter ces deux variables dans Render / environnement sécurisé.
+
+Important:
+- ne pas mettre ces secrets dans GitHub,
+- ne pas les mettre dans un fichier markdown,
+- ne pas les committer,
+- ne pas les coller dans un ticket public.
+
+## Message exact à copier-coller dans Claude Code après configuration Upstash
+
+```text
+Contexte court:
+- La CI est déjà faite au commit 363682c. Ne la refais pas.
+- SEC-001 phase 2 est bloqué car le frontend envoie encore x-organization-id. Ne touche pas à SEC-001 maintenant.
+- Les credentials Upstash Redis sont maintenant configurés dans l'environnement Render.
+
+Ta seule tâche maintenant:
+Vérifier que l'application utilise bien Upstash Redis pour les pending actions en production.
+
+À faire:
+1. Inspecte le code pending actions / Redis.
+2. Vérifie que UPSTASH_REDIS_REST_URL et UPSTASH_REDIS_REST_TOKEN sont lus depuis l'environnement.
+3. Vérifie que le fallback mémoire n'est utilisé qu'en dev ou quand Redis n'est pas configuré.
+4. Vérifie TTL + single-use des pending actions.
+5. Lance les tests disponibles.
+6. Donne une procédure de smoke test production sans exposer les secrets.
+
+Ne fais pas:
+- pas de refonte UX,
+- pas de SEC-001 phase 2,
+- pas de changement frontend auth,
+- pas de pricing,
+- pas de swimlanes,
+- pas de gros refactor.
+
+Commandes attendues:
+- npm run typecheck
+- npm test
+- npm run lint si disponible
+
+Réponse attendue:
+- fichiers inspectés,
+- fichiers modifiés si nécessaire,
+- commandes exécutées,
+- résultats,
+- preuve que Redis est utilisé,
+- preuve TTL / single-use,
+- risques restants,
+- rollback.
+```
+
+## Si Claude Code repart sur SEC-001
+
+```text
+Stop. SEC-001 phase 2 est explicitement hors périmètre maintenant.
+Le frontend envoie encore x-organization-id, donc ce sera un ticket séparé frontend + backend.
+Reviens uniquement à Upstash Redis / pending actions.
+```
+
+## Si Claude Code repart sur UX / produit
+
+```text
+Stop. UX, produit, swimlanes, pricing et assistant IA sont hors périmètre.
+La seule tâche maintenant est Upstash Redis / pending actions.
+```
+
+## Ticket séparé à créer plus tard
+
+Titre:
+SEC-001 phase 2 — migrer le frontend vers Authorization Bearer JWT
+
+Description:
+Le frontend envoie encore x-organization-id sur chaque appel API.
+On ne peut pas supprimer le fallback backend sans casser la prod.
+Créer un sprint séparé pour migrer les appels frontend vers Authorization: Bearer <jwt>, puis faire dériver user/org/role côté backend depuis JWT + membership DB.

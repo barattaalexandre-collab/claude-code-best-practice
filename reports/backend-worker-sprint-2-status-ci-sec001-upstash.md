@@ -7,8 +7,8 @@ Sprint 2 n'est pas terminé, mais il est clarifié:
 | Tâche | Statut | Décision |
 |---|---|---|
 | CI GitHub Actions | ✅ fait | Commit réel `363682c` poussé. CI complétée avec build + typecheck + tests + audit tenant. |
-| SEC-001 phase 2 | ⛔ bloqué | À sortir en ticket/sprint séparé: le frontend envoie encore `x-organization-id` sur chaque appel API. |
-| Upstash Redis | ⏳ action Alexandre | Besoin de créer la DB Redis et fournir `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`. |
+| SEC-001 phase 2 | ▶️ prochaine action | Mini-audit + plan de migration frontend vers `Authorization: Bearer <jwt>` avant code. |
+| Upstash Redis | ✅ fait | DB créée, variables Render sauvegardées, redeploy live, Redis `PONG`, tests 217/217. |
 
 ---
 
@@ -122,3 +122,19 @@ Ne loggue pas les secrets.
 2. Créer/configurer Upstash Redis côté Alexandre.
 3. Ouvrir un ticket séparé pour SEC-001 phase 2, car le frontend doit être refactoré vers `Authorization: Bearer <jwt>`.
 4. Ne pas supprimer le fallback backend tant que le frontend n'est pas migré.
+
+## Mise à jour après exécution Upstash
+
+Upstash Redis est terminé selon le retour d'exécution:
+
+- DB `nmarti-backend-worker` créée en Frankfurt / Free,
+- variables `UPSTASH_REDIS_REST_URL` et `UPSTASH_REDIS_REST_TOKEN` sauvegardées dans Render,
+- redeploy Render live à 10:39,
+- Redis REST répond `PONG`,
+- typecheck 0 erreur,
+- `npm test` 217/217 pass,
+- lint non applicable car eslint non installé localement et non présent en CI,
+- aucun secret committé,
+- pending actions utilisent Redis en production.
+
+La prochaine action est maintenant `reports/backend-worker-prochaine-action-sec001-phase2.md`: demander à Claude Code un mini-audit SEC-001 phase 2 avant toute modification.

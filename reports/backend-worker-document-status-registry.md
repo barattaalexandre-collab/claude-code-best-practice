@@ -34,6 +34,7 @@
 | `backend-worker-pack-a-transmettre-a-claude-code.md` | proposition |
 | `backend-worker-plan-execution-cloud-code.md` | plan-execution-à-valider |
 | `backend-worker-prompts-readme.md` | draft |
+| `backend-worker-prochaine-action-sec001-phase2.md` | prochaine-action-mini-audit-sec001 |
 | `backend-worker-propagation-verification.md` | proposition |
 | `backend-worker-render-deploy-incident-lockfile-invalid-version.md` | draft |
 | `backend-worker-render-deploy-incident-rate-limit.md` | draft |
@@ -62,3 +63,4 @@ Le document `backend-worker-github-sync-reality-check.md` corrige la source de v
 Le document `backend-worker-sprint-2-status-ci-sec001-upstash.md` devient le point de suivi immédiat: CI OK au commit `363682c`, SEC-001 phase 2 séparé, Upstash à fournir par Alexandre.
 Le document `backend-worker-message-simple-pour-claude-code.md` est désormais le message minimal recommandé pour éviter la confusion: uniquement Upstash Redis/pending actions, SEC-001 phase 2 séparé.
 Le document `backend-worker-action-immediate-pas-a-pas.md` est le guide à utiliser maintenant: une seule action, Upstash Redis via Claude Code/Chrome, avant tout autre chantier.
+Le document `backend-worker-prochaine-action-sec001-phase2.md` remplace l’action Upstash une fois terminée: demander un mini-audit SEC-001 phase 2 avant tout code.

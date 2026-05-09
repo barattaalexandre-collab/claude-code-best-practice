@@ -27,6 +27,7 @@
 | `backend-worker-github-sync-reality-check.md` | source-verite-github-corrigee |
 | `backend-worker-github-issues-prompts.md` | backlog-hardening |
 | `backend-worker-issues-created.md` | backlog-hardening |
+| `backend-worker-message-simple-pour-claude-code.md` | message-minimal-action-immediate |
 | `backend-worker-message-for-claude.md` | proposition |
 | `backend-worker-pack-a-transmettre-a-claude-code.md` | proposition |
 | `backend-worker-plan-execution-cloud-code.md` | plan-execution-à-valider |
@@ -57,3 +58,4 @@ Le document `backend-worker-apres-creation-handoff-claude-code.md` prend le rela
 Le document `backend-worker-etapes-transmission-claude-code.md` est le guide détaillé à suivre pour transmettre les tâches à Claude Code sans ouvrir de chantier hors périmètre.
 Le document `backend-worker-github-sync-reality-check.md` corrige la source de vérité après constat que la PR/commit local temporaire n'est pas présent sur GitHub; l'exécution doit repartir du commit réel `e86a9b6` dans `backend-worker`.
 Le document `backend-worker-sprint-2-status-ci-sec001-upstash.md` devient le point de suivi immédiat: CI OK au commit `363682c`, SEC-001 phase 2 séparé, Upstash à fournir par Alexandre.
+Le document `backend-worker-message-simple-pour-claude-code.md` est désormais le message minimal recommandé pour éviter la confusion: uniquement Upstash Redis/pending actions, SEC-001 phase 2 séparé.

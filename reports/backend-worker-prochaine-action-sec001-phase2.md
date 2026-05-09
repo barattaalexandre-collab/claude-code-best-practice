@@ -153,3 +153,76 @@ Ne commence pas PR 2 tant que PR 1 n'est pas validée.
 4. Me montrer le plan avant de lui dire de coder.
 
 Ne lui dis pas encore "implémente tout".
+
+---
+
+## Décision après mini-audit reçu
+
+Le mini-audit est cohérent: **on valide uniquement PR 1**.
+
+Ne pas valider PR 2 ou PR 3 maintenant.
+
+### Pourquoi PR 1 seulement
+
+PR 1 est la plus sûre car elle ne change pas le comportement produit visible et ne supprime pas le fallback existant.
+
+Objectif PR 1:
+
+- centraliser l'usage de `request.user.organizationId` côté backend,
+- remplacer dans les routes les lectures directes de `request.headers['x-organization-id']`,
+- garder le fallback actuel dans `jwt-auth.ts`,
+- ne pas toucher au frontend,
+- ne pas introduire encore `/api/auth/app-token`,
+- ne pas supprimer de headers,
+- ne pas casser la prod.
+
+### Message exact à donner à Claude Code maintenant
+
+```text
+Plan validé partiellement.
+
+Tu peux commencer PR 1 uniquement.
+
+Périmètre PR 1:
+- Backend uniquement.
+- Remplacer les lectures directes de request.headers['x-organization-id'] dans les routes par request.user.organizationId.
+- Fichiers concernés selon ton audit:
+  - src/routes/public/crm.ts
+  - src/routes/public/documents.ts
+  - src/routes/public/projects.ts
+  - src/routes/public/supply.ts
+  - src/routes/public/voice.ts
+  - src/routes/public/ai.ts
+- Garder intact le fallback actuel dans src/auth/jwt-auth.ts.
+- Ne pas ajouter /api/auth/app-token maintenant.
+- Ne pas modifier le frontend maintenant.
+- Ne pas supprimer x-organization-id côté frontend.
+- Ne pas faire PR 2 ni PR 3.
+
+Tests attendus:
+- npm run typecheck
+- npm test
+- npm run lint si disponible
+- ajouter ou adapter un test prouvant que les routes utilisent request.user.organizationId, pas une relecture directe de x-organization-id.
+
+À la fin, donne-moi:
+- fichiers modifiés,
+- diff résumé,
+- tests exécutés et résultats,
+- preuve qu'il ne reste plus de lecture directe x-organization-id dans les routes listées,
+- risques restants,
+- rollback.
+
+Stop après PR 1. Attends validation avant PR 2.
+```
+
+### Critère de validation PR 1
+
+PR 1 est validable si:
+
+- les routes listées n'utilisent plus directement `request.headers['x-organization-id']`,
+- `request.user.organizationId` est utilisé pour le scoping DB,
+- le fallback `jwt-auth.ts` reste en place,
+- aucun changement frontend n'est inclus,
+- typecheck et tests passent,
+- rollback est documenté.

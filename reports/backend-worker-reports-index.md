@@ -39,7 +39,7 @@ Ce document sert de point d'entrée unique.
 17. `backend-worker-action-immediate-pas-a-pas.md`
    - Prochaine action unique avec prompt exact: Claude Code/Chrome configure Upstash Redis puis vérifie pending actions.
 18. `backend-worker-prochaine-action-sec001-phase2.md`
-   - Prochaine action après Upstash: demander à Claude Code un mini-audit SEC-001 phase 2 avant toute modification.
+   - Prochaine action après mini-audit SEC-001: autoriser PR 1 backend uniquement, sans frontend ni suppression fallback.
 
 ## Option prompt direct
 
@@ -49,4 +49,4 @@ Ce document sert de point d'entrée unique.
 
 ## Lecture recommandée maintenant
 
-Pour répondre au "alors ?" opérationnel: commencer par `backend-worker-START-HERE.md`, lire `backend-worker-prochaine-action-sec001-phase2.md`, puis copier-coller son prompt de mini-audit dans Claude Code et arbitrer le compte-rendu Yannick avant de lancer de nouveaux tickets techniques.
+Pour répondre au "alors ?" opérationnel: commencer par `backend-worker-START-HERE.md`, lire `backend-worker-prochaine-action-sec001-phase2.md`, puis copier-coller le prompt PR 1 uniquement dans Claude Code et arbitrer le compte-rendu Yannick avant de lancer de nouveaux tickets techniques.

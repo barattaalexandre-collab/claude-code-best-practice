@@ -76,3 +76,112 @@ Elle agit uniquement au nom de l'utilisateur authentifié et ne peut jamais dép
 4. Confirmer les seuils finance nécessitant double validation.
 5. Confirmer si les annulations sont toujours des soft-delete.
 6. Confirmer qui peut restaurer une action annulée.
+
+## Clarifications proposées après retour Alexandre
+
+### 1. Nommer correctement "moi avec tous les droits"
+
+Recommandation: ne pas appeler Alexandre simplement `admin`, car `admin` est ambigu.
+
+Proposition de vocabulaire:
+
+| Rôle | Sens recommandé |
+|---|---|
+| `platform_admin` ou `super_admin` | Alexandre / Les Précurseurs Lab: accès transversal plateforme, support, maintenance, urgence. |
+| `owner` | Propriétaire / CEO / direction de l'entreprise cliente qui achète l'app. |
+| `org_admin` | Administrateur interne de l'entreprise cliente, délégué par le owner. |
+| `manager` | Chef de projet / responsable opérationnel. |
+| `field_user` | Collaborateur terrain. |
+| `accountant` ou `finance` | Responsable finance/facturation. |
+| `viewer` | Lecture seule. |
+
+Décision recommandée:
+- Alexandre = `platform_admin` / `super_admin`.
+- Le patron/propriétaire de l'entreprise cliente = `owner`.
+- Éviter d'utiliser `admin` seul dans le produit final.
+
+### 2. Droits du `field_user`
+
+Décision proposée selon retour Alexandre:
+- `field_user` peut modifier uniquement ses propres éléments.
+- Exemples: ses notes, ses photos, ses visites, ses tâches assignées.
+- Il ne peut pas modifier les éléments d'un collègue sauf délégation explicite.
+
+### 3. Double validation finance
+
+Réponse prudente: tout ce qui est sensible doit demander validation renforcée.
+
+Proposition de règle simple:
+
+| Action finance | Validation proposée |
+|---|---|
+| Modifier libellé/commentaire interne | confirmation simple |
+| Modifier montant, TVA, statut facture, échéance | confirmation obligatoire |
+| Annuler facture, paiement, avoir, ou écriture comptable | double validation |
+| Supprimer document financier | interdit ou double validation + soft-delete |
+
+Double validation possible:
+- action demandée par `accountant` puis validée par `owner`, ou
+- action demandée par `owner` puis confirmée une seconde fois explicitement.
+
+### 4. Soft-delete expliqué simplement
+
+Soft-delete signifie: on ne supprime pas vraiment la donnée de la base.
+
+Au lieu de détruire la ligne définitivement, on marque l'objet comme:
+- `deleted`,
+- `cancelled`,
+- `archived`,
+- ou avec un champ `deleted_at`.
+
+Avantages:
+- on peut restaurer en cas d'erreur,
+- on garde l'historique,
+- on peut auditer qui a annulé quoi,
+- on évite les pertes de données irréversibles.
+
+Exemple:
+- suppression dure: la facture disparaît définitivement de la DB.
+- soft-delete: la facture devient "annulée/archivée", invisible dans les vues normales, mais restaurable par un rôle autorisé.
+
+Recommandation:
+- utiliser soft-delete par défaut pour tout objet métier important.
+- réserver la suppression définitive à des cas exceptionnels et très encadrés.
+
+### 5. Qui peut restaurer une action annulée ?
+
+Proposition alignée avec le retour Alexandre:
+
+| Type d'objet | Peut restaurer |
+|---|---|
+| Client/contact/projet | `platform_admin`, `owner`, éventuellement `org_admin` |
+| Notes/photos/visites/tâches | `platform_admin`, `owner`, `manager` si périmètre projet |
+| Documents | `platform_admin`, `owner`, `manager` selon type document |
+| Finance/facturation | `platform_admin`, `owner`, `accountant/finance` |
+
+Recommandation:
+- Alexandre (`platform_admin`) peut restaurer en support/urgence.
+- Le propriétaire client (`owner`) peut restaurer dans son organisation.
+- La finance (`accountant/finance`) peut restaurer uniquement les objets financiers.
+- Toute restauration doit être journalisée.
+
+### 6. Matrice de rôles recommandée V1
+
+| Rôle recommandé | À garder ? | Commentaire |
+|---|---|---|
+| `platform_admin` / `super_admin` | Oui | Alexandre / équipe plateforme. |
+| `owner` | Oui | Propriétaire/CEO de la société cliente. |
+| `org_admin` | Optionnel V1 | Utile si le owner délègue l'administration. |
+| `manager` | Oui | Responsable projet/opérations. |
+| `field_user` | Oui | Terrain, limité à ses propres éléments. |
+| `accountant` / `finance` | Oui | Finance/facturation. |
+| `viewer` | Oui | Lecture seule. |
+
+## Décisions encore à valider explicitement
+
+1. Choisir le nom exact: `platform_admin` ou `super_admin`.
+2. Décider si `org_admin` existe dès V1 ou plus tard.
+3. Valider la règle: `field_user` = uniquement ses propres éléments.
+4. Valider la règle finance: double validation pour annulation/suppression/modification sensible.
+5. Valider soft-delete par défaut pour objets métier importants.
+6. Valider les restaurations par domaine: owner global org, finance uniquement finance, platform admin support/urgence.

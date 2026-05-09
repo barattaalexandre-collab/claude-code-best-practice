@@ -12,7 +12,7 @@
 
 ## Alors — prochaine action recommandée
 
-1. **Ne plus envoyer les longs summaries.** Utiliser uniquement `reports/backend-worker-message-simple-pour-claude-code.md`: CI déjà faite, SEC-001 bloqué, prochaine action = créer/configurer Upstash puis demander à Claude Code de vérifier Redis/pending actions.
+1. **Faire une seule action maintenant.** Utiliser `reports/backend-worker-action-immediate-pas-a-pas.md`: ouvrir Claude Code dans `/Users/alexandrebaratta/backend-worker`, coller le prompt unique, et laisser Claude Code/Chrome configurer Upstash Redis puis vérifier les pending actions.
 2. **Décider explicitement du statut de la séance Yannick.** Le compte-rendu du 2026-05-08 est un input prioritaire, mais pas une décision officielle tant qu'Alexandre ne l'a pas validé.
 3. **Transformer les retours en 3 tickets maximum avant la prochaine démo:**
    - scénario de démo orienté problèmes client,
@@ -34,6 +34,7 @@
 - `reports/backend-worker-sprint-2-status-ci-sec001-upstash.md` — statut réel Sprint 2: CI faite, SEC-001 phase 2 bloqué, Upstash à créer.
 - `reports/backend-worker-message-simple-pour-claude-code.md` — version ultra-simple à copier-coller: uniquement Upstash Redis maintenant, pas SEC-001 ni UX.
 - `reports/backend-worker-message-simple-pour-claude-code.txt` — version brute à créer/copier si le fichier `.md` est absent dans le repo cible.
+- `reports/backend-worker-action-immediate-pas-a-pas.md` — prochaine action unique, pas à pas, avec le prompt exact à coller dans Claude Code/Chrome.
 - `reports/backend-worker-document-status-registry.md` — statut officiel/draft/proposition de chaque document.
 
 ## Prompt opérationnel (proposition)

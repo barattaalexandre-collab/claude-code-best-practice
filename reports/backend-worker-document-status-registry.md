@@ -13,6 +13,7 @@
 | `backend-worker-cadrage-officiel-v1.md` | **official-v1** |
 | `backend-worker-droits-modification-annulation-officiel-v1.md` | **official-v1** |
 | `backend-worker-audit-preliminary.md` | draft |
+| `backend-worker-action-immediate-pas-a-pas.md` | action-immediate-pas-a-pas |
 | `backend-worker-apres-creation-handoff-claude-code.md` | suite-operationnelle-immediate |
 | `backend-worker-a-donner-a-claude-code-maintenant.md` | prompt-action-immediate |
 | `backend-worker-cloud-code-handoff.md` | proposition |
@@ -60,3 +61,4 @@ Le document `backend-worker-etapes-transmission-claude-code.md` est le guide dé
 Le document `backend-worker-github-sync-reality-check.md` corrige la source de vérité après constat que la PR/commit local temporaire n'est pas présent sur GitHub; l'exécution doit repartir du commit réel `e86a9b6` dans `backend-worker`.
 Le document `backend-worker-sprint-2-status-ci-sec001-upstash.md` devient le point de suivi immédiat: CI OK au commit `363682c`, SEC-001 phase 2 séparé, Upstash à fournir par Alexandre.
 Le document `backend-worker-message-simple-pour-claude-code.md` est désormais le message minimal recommandé pour éviter la confusion: uniquement Upstash Redis/pending actions, SEC-001 phase 2 séparé.
+Le document `backend-worker-action-immediate-pas-a-pas.md` est le guide à utiliser maintenant: une seule action, Upstash Redis via Claude Code/Chrome, avant tout autre chantier.

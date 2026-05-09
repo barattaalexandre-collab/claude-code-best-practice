@@ -36,6 +36,8 @@ Ce document sert de point d'entrée unique.
    - Message minimal à utiliser maintenant: ne plus envoyer l'historique, traiter seulement Upstash Redis / pending actions.
 16. `backend-worker-message-simple-pour-claude-code.txt`
    - Contenu brut à copier/créer si le fichier markdown est absent du repo cible.
+17. `backend-worker-action-immediate-pas-a-pas.md`
+   - Prochaine action unique avec prompt exact: Claude Code/Chrome configure Upstash Redis puis vérifie pending actions.
 
 ## Option prompt direct
 
@@ -45,4 +47,4 @@ Ce document sert de point d'entrée unique.
 
 ## Lecture recommandée maintenant
 
-Pour répondre au "alors ?" opérationnel: commencer par `backend-worker-START-HERE.md`, lire `backend-worker-message-simple-pour-claude-code.md`, créer/configurer Upstash, puis copier-coller son message minimal à Claude Code et arbitrer le compte-rendu Yannick avant de lancer de nouveaux tickets techniques.
+Pour répondre au "alors ?" opérationnel: commencer par `backend-worker-START-HERE.md`, lire `backend-worker-action-immediate-pas-a-pas.md`, puis copier-coller son prompt unique dans Claude Code et arbitrer le compte-rendu Yannick avant de lancer de nouveaux tickets techniques.

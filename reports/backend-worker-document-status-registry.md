@@ -28,6 +28,7 @@
 | `backend-worker-github-issues-prompts.md` | backlog-hardening |
 | `backend-worker-issues-created.md` | backlog-hardening |
 | `backend-worker-message-simple-pour-claude-code.md` | message-minimal-action-immediate |
+| `backend-worker-message-simple-pour-claude-code.txt` | contenu-brut-a-creer-si-absent |
 | `backend-worker-message-for-claude.md` | proposition |
 | `backend-worker-pack-a-transmettre-a-claude-code.md` | proposition |
 | `backend-worker-plan-execution-cloud-code.md` | plan-execution-à-valider |

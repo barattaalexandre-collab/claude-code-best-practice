@@ -33,6 +33,7 @@
 - `reports/backend-worker-github-sync-reality-check.md` — correction de source de vérité: PR locale introuvable, commit réel `e86a9b6`, handoff Sprint 2 sur GitHub.
 - `reports/backend-worker-sprint-2-status-ci-sec001-upstash.md` — statut réel Sprint 2: CI faite, SEC-001 phase 2 bloqué, Upstash à créer.
 - `reports/backend-worker-message-simple-pour-claude-code.md` — version ultra-simple à copier-coller: uniquement Upstash Redis maintenant, pas SEC-001 ni UX.
+- `reports/backend-worker-message-simple-pour-claude-code.txt` — version brute à créer/copier si le fichier `.md` est absent dans le repo cible.
 - `reports/backend-worker-document-status-registry.md` — statut officiel/draft/proposition de chaque document.
 
 ## Prompt opérationnel (proposition)

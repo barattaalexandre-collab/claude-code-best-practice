@@ -34,6 +34,8 @@ Ce document sert de point d'entrée unique.
    - Statut Sprint 2 réel: CI terminée (`363682c`), SEC-001 phase 2 bloqué par frontend headers, Upstash credentials requis.
 15. `backend-worker-message-simple-pour-claude-code.md`
    - Message minimal à utiliser maintenant: ne plus envoyer l'historique, traiter seulement Upstash Redis / pending actions.
+16. `backend-worker-message-simple-pour-claude-code.txt`
+   - Contenu brut à copier/créer si le fichier markdown est absent du repo cible.
 
 ## Option prompt direct
 

@@ -1,11 +1,29 @@
 from __future__ import annotations
 
 SYMBOLS: list[str] = [
+    # Majors
     "BTCUSDT",
     "ETHUSDT",
     "BNBUSDT",
     "SOLUSDT",
     "XRPUSDT",
+    # Large-cap alts; BCHUSDT intentionally excluded after concentrated stop-loss share in paper trading.
+    "DOGEUSDT",
+    "ADAUSDT",
+    "AVAXUSDT",
+    "LINKUSDT",
+    "DOTUSDT",
+    "TRXUSDT",
+    "LTCUSDT",
+    # L1/L2
+    "SUIUSDT",
+    "NEARUSDT",
+    "APTUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    # Extras
+    "TIAUSDT",
+    "ATOMUSDT",
 ]
 
 # Research threshold after live funding-rate observations showed ±0.0003 was still too strict; re-evaluate after 24-48h.

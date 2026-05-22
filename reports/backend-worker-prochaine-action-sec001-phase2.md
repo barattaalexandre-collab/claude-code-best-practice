@@ -226,3 +226,92 @@ PR 1 est validable si:
 - aucun changement frontend n'est inclus,
 - typecheck et tests passent,
 - rollback est documenté.
+
+---
+
+## PR 1 terminée — décision suivante
+
+PR 1 est terminée et commitée dans le repo `backend-worker`.
+
+Retour d'exécution reçu:
+
+- commit: `f90a00c`,
+- 7 fichiers de routes publiques patchés,
+- `requireOrgId()` lit maintenant `request.user.organizationId`,
+- `feedback.ts` utilise `request.user?.organizationId` pour le logging,
+- le fallback `x-organization-id` dans `jwt-auth.ts` reste intact,
+- aucun changement frontend,
+- typecheck: 0 erreur,
+- tests: 217/217 pass.
+
+Donc PR 1 est validée côté exécution.
+
+### Prochaine action unique: PR 2, mais seulement si Alexandre valide
+
+PR 2 introduit le Bearer token applicatif. C'est plus risqué que PR 1, donc il faut l'autoriser explicitement.
+
+Objectif PR 2:
+
+- backend: ajouter un second chemin de validation JWT HS256 applicatif,
+- backend: ajouter `/api/auth/app-token`,
+- frontend: appeler `/api/auth/app-token`, garder le token en mémoire,
+- frontend: ajouter `Authorization: Bearer <token>` aux appels API,
+- garder temporairement `x-organization-id` pendant la transition,
+- ne pas supprimer le fallback backend,
+- ne pas faire PR 3.
+
+### Message exact à donner à Claude Code pour PR 2
+
+```text
+PR 1 est validée.
+
+Tu peux préparer PR 2 uniquement.
+
+Objectif PR 2:
+Introduire un Bearer token applicatif sans casser la production.
+
+Périmètre autorisé:
+- Backend: ajouter APP_TOKEN_SECRET dans env/config avec validation forte.
+- Backend: ajouter un endpoint POST /api/auth/app-token.
+- Backend: l'endpoint peut utiliser x-organization-id temporairement pour générer un app-token, mais doit être protégé par un mécanisme interne documenté.
+- Backend: ajouter dans jwtAuthHook un second chemin de validation HS256 applicatif avant ou à côté du chemin Supabase.
+- Frontend: dans precurseur-shell/src/services/config.ts, ajouter getAppToken() avec cache mémoire.
+- Frontend: ajouter Authorization: Bearer <token> dans getApiHeaders().
+- Frontend: garder x-organization-id temporairement pendant la transition.
+
+Interdictions:
+- Ne supprime pas le fallback x-organization-id dans jwt-auth.ts.
+- Ne supprime pas x-organization-id côté frontend.
+- Ne fais pas PR 3.
+- Ne change pas l'UX.
+- Ne change pas les rôles métier.
+- Ne touche pas aux swimlanes ni au pricing.
+
+Tests attendus:
+- npm run typecheck
+- npm test
+- npm run lint si disponible
+- test endpoint /api/auth/app-token: token interne invalide => 401
+- test JWT HS256 valide => request.user.organizationId correctement set
+- test JWT HS256 expiré => 401
+- test JWT Supabase valide toujours accepté si déjà couvert
+- smoke test frontend: les appels API contiennent Authorization tout en gardant les headers existants
+
+À la fin, donne-moi:
+- fichiers modifiés,
+- diff résumé,
+- variables d'environnement à ajouter sans révéler de secret,
+- tests exécutés et résultats,
+- risques restants,
+- rollback.
+
+Stop après PR 2. N'exécute pas PR 3.
+```
+
+### Attention avant de lancer PR 2
+
+Avant de dire oui à PR 2, Alexandre doit accepter qu'une variable secrète backend soit ajoutée:
+
+`APP_TOKEN_SECRET`
+
+Elle doit être générée comme secret fort, configurée dans Render, et jamais commitée.

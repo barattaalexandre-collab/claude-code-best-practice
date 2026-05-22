@@ -65,3 +65,4 @@ Le document `backend-worker-message-simple-pour-claude-code.md` est désormais l
 Le document `backend-worker-action-immediate-pas-a-pas.md` est le guide à utiliser maintenant: une seule action, Upstash Redis via Claude Code/Chrome, avant tout autre chantier.
 Le document `backend-worker-prochaine-action-sec001-phase2.md` remplace l’action Upstash une fois terminée: demander un mini-audit SEC-001 phase 2 avant tout code.
 Le document `backend-worker-prochaine-action-sec001-phase2.md` contient maintenant la décision après mini-audit: autoriser PR 1 backend uniquement, sans frontend ni suppression fallback.
+Le document `backend-worker-prochaine-action-sec001-phase2.md` indique maintenant que PR 1 est terminée au commit `f90a00c`; la prochaine décision est PR 2 Bearer app-token avec `APP_TOKEN_SECRET`.

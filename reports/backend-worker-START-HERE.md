@@ -12,7 +12,7 @@
 
 ## Alors — prochaine action recommandée
 
-1. **Autoriser PR 1 uniquement.** Le mini-audit SEC-001 est reçu; utiliser `reports/backend-worker-prochaine-action-sec001-phase2.md`: demander à Claude Code de faire seulement PR 1 backend, remplacer les lectures directes `x-organization-id` par `request.user.organizationId`, sans toucher frontend ni fallback.
+1. **Décider si on lance PR 2.** PR 1 est terminée au commit `f90a00c`; utiliser `reports/backend-worker-prochaine-action-sec001-phase2.md`: PR 2 ajoute Bearer app-token frontend/backend, garde les headers/fallback temporairement, et nécessite `APP_TOKEN_SECRET` dans Render.
 2. **Décider explicitement du statut de la séance Yannick.** Le compte-rendu du 2026-05-08 est un input prioritaire, mais pas une décision officielle tant qu'Alexandre ne l'a pas validé.
 3. **Transformer les retours en 3 tickets maximum avant la prochaine démo:**
    - scénario de démo orienté problèmes client,

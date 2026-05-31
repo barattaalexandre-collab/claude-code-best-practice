@@ -52,6 +52,8 @@ Ce document sert de point d'entrée unique.
    - Revue du mini-audit Option B: validation partielle, ordre d'exécution et prompt pour coder uniquement DEMO-001..004.
 24. `backend-worker-option-b-demo-001-004-status.md`
    - Statut après exécution DEMO-001..004 et décision: répétition à blanc avant DEMO-005/006.
+25. `probat-notes-correction-consolidees.md`
+   - Notes ProBAT consolidées: priorité critique sur reconnaissance vocale, assistant IA omniprésent, retours arrière et simplification UX.
 
 ## Option prompt direct
 

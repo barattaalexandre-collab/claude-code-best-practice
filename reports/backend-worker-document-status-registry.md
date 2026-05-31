@@ -39,6 +39,7 @@
 | `backend-worker-option-b-mini-audit-review.md` | validation-partielle-option-b |
 | `backend-worker-option-b-demo-001-004-status.md` | statut-execution-demo-001-004 |
 | `backend-worker-prompts-readme.md` | draft |
+| `probat-notes-correction-consolidees.md` | backlog-produit-ux-a-valider |
 | `backend-worker-prochaine-action-sec001-phase2.md` | prochaine-action-mini-audit-sec001 |
 | `backend-worker-sec001-pr3-mini-plan.md` | proposition-execution-controlee |
 | `backend-worker-propagation-verification.md` | proposition |
@@ -84,3 +85,4 @@ Le document `backend-worker-option-b-files-a-fournir.md` indique comment fournir
 Le document `backend-worker-option-b-bootstrap-si-fichiers-absents.md` fournit un cadrage minimal pour recréer les trois fichiers Option B si la recherche locale confirme qu'ils n'existent nulle part sur le Mac.
 Le document `backend-worker-option-b-mini-audit-review.md` valide partiellement le mini-audit Option B: autoriser DEMO-001..004 seulement, reporter DEMO-005/006 et maintenir le gel SEC-001 PR 3 / SEC-002..SEC-007.
 Le document `backend-worker-option-b-demo-001-004-status.md` constate DEMO-001..004 terminés et recommande une répétition à blanc avant d'autoriser DEMO-005 ou DEMO-006.
+Le document `probat-notes-correction-consolidees.md` capture les retours produit ProBAT du 2026-05-31: voix fiable, assistant IA omniprésent et navigation ultra-simple; il reste un backlog à valider et ne modifie pas le cadrage officiel V1.

@@ -3,12 +3,16 @@ from __future__ import annotations
 from config import FUNDING_LONG_THRESHOLD, FUNDING_SHORT_THRESHOLD, SYMBOLS
 
 
-def test_symbols_count_is_nineteen() -> None:
-    assert len(SYMBOLS) == 19
+def test_symbols_count_is_eighteen() -> None:
+    assert len(SYMBOLS) == 18
 
 
 def test_bchusdt_is_removed_from_watchlist() -> None:
     assert "BCHUSDT" not in SYMBOLS
+
+
+def test_atomusdt_is_removed_from_watchlist() -> None:
+    assert "ATOMUSDT" not in SYMBOLS
 
 
 def test_research_thresholds_are_point_0002() -> None:

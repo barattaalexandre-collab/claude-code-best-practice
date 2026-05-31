@@ -21,9 +21,8 @@ SYMBOLS: list[str] = [
     "APTUSDT",
     "ARBUSDT",
     "OPUSDT",
-    # Extras
+    # Extras; ATOMUSDT intentionally excluded after repeated post-BCH stop losses.
     "TIAUSDT",
-    "ATOMUSDT",
 ]
 
 # Research threshold after live funding-rate observations showed ±0.0003 was still too strict; re-evaluate after 24-48h.

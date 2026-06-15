@@ -62,6 +62,8 @@ Ce document sert de point d'entrée unique.
    - Régression CRM Contacts: voix absente pour modifier un contact, assistant multi-tour confus et updates contact à valeur vide.
 29. `probat-plan-redressement-agentique-ux.md`
    - Plan de redressement global: audit transversal, moteur agentique commun, voix globale et simplification UX/mobile.
+30. `probat-phase1-audit-transversal-agentique.md`
+   - Phase 1 livrée: audit transversal 15 modules, architecture agentique actuelle/cible et plan PR1..PR6 détaillé.
 
 ## Option prompt direct
 

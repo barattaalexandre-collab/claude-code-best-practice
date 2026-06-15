@@ -44,6 +44,7 @@
 | `probat-p0-nlu-fab-execution-status.md` | statut-execution-p0-go-avec-qa-fab |
 | `probat-crm-contacts-ai-voice-regression.md` | regression-p0-crm-contacts-ai-voice |
 | `probat-plan-redressement-agentique-ux.md` | plan-redressement-p0-agentique-ux-global |
+| `probat-phase1-audit-transversal-agentique.md` | audit-transversal-agentique-phase-1-livre |
 | `backend-worker-prochaine-action-sec001-phase2.md` | prochaine-action-mini-audit-sec001 |
 | `backend-worker-sec001-pr3-mini-plan.md` | proposition-execution-controlee |
 | `backend-worker-propagation-verification.md` | proposition |
@@ -94,3 +95,4 @@ Le document `probat-audit-mobai-post-corrections.md` capture l'audit MobAI post-
 Le document `probat-p0-nlu-fab-execution-status.md` capture l'exécution des deux P0: backend #14 validé E2E pour le NLU create intent, frontend #15 livré pour le FAB, avec QA humaine courte recommandée sur le premier clic.
 Le document `probat-crm-contacts-ai-voice-regression.md` capture une nouvelle régression P0 sur CRM Contacts: voix absente pour modifier un contact, assistant multi-tour confus, recherche contact insuffisante et propositions d'update à valeur vide.
 Le document `probat-plan-redressement-agentique-ux.md` élargit le constat: les régressions ne sont pas limitées aux contacts; il faut un audit transversal et une refonte contrôlée de la boucle agentique, de la voix globale et de l'UX mobile/menu.
+Le document `probat-phase1-audit-transversal-agentique.md` capture la Phase 1 livrée: audit de 15 modules, diagnostic architecture agentique texte/voix, cible `agentBus`, plan PR1..PR6 et attente du GO utilisateur avant code.
